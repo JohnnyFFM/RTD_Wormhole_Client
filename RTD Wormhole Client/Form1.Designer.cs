@@ -52,6 +52,7 @@
             this.tb_ccy = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.tb_fx = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -242,6 +243,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.tb_fx);
             this.groupBox1.Controls.Add(this.tb_ccy);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label1);
@@ -279,6 +281,14 @@
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Currency";
+            // 
+            // tb_fx
+            // 
+            this.tb_fx.Enabled = false;
+            this.tb_fx.Location = new System.Drawing.Point(216, 28);
+            this.tb_fx.Name = "tb_fx";
+            this.tb_fx.Size = new System.Drawing.Size(100, 20);
+            this.tb_fx.TabIndex = 3;
             // 
             // Form1
             // 
@@ -344,6 +354,7 @@
         private System.Windows.Forms.TextBox tb_ccy;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tb_fx;
     }
 }
 

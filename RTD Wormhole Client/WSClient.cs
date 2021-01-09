@@ -88,43 +88,64 @@ namespace RTD_Wormhole
                     Console.WriteLine(Encoding.UTF8.GetString(args.Data), false);
                     break;
                 case WebSocketMessageType.Binary:
-                    //Object data = Helper.ByteArrayToObject(args.Data);
-                    
-                    // todo number of topics needs to be passed
-                    OnData(new DataEventArgs(0, args.Data));
+
+                    object incoming = Helper.ByteArrayToObject(args.Data);
+                    switch (incoming)
+                    {
+                        case RTDdata data:
+                            OnData(new DataEventArgs(data.count, data.data));
+                            break;
+                        default:
+                            break;
+                    }
+
                     break;
                 default:
                     break;
             }
         }
 
+
         public void Subscribe(int topicID, object[] data)
         {
-            SubscribeRequest sr = new SubscribeRequest(topicID, data);
+            SubscriptionRequest sr = new SubscriptionRequest(topicID, data);
             byte[] srb = Helper.ObjectToByteArray(sr);
             LinkClient.SendAsync(srb);
         }
     }
 
     [Serializable]
-    struct SubscribeRequest
+    struct SubscriptionRequest
     {
         readonly int topicID;
         readonly object[] topicParams;
 
-        public SubscribeRequest(int x, object[] y)
+        public SubscriptionRequest(int x, object[] y)
         {
             this.topicID = x;
             this.topicParams = y;
         }
     }
 
+    [Serializable]
+    struct RTDdata
+    {
+        public readonly int count;
+        public readonly object[,] data;
+
+        public RTDdata(int x, object[,] y)
+        {
+            this.count = x;
+            this.data = y;
+        }
+    }
+
     public class DataEventArgs : EventArgs
     {
-        public byte[] Data { get; set; }
+        public object[,] Data { get; set; }
         public int Count { get; set; }
 
-        public DataEventArgs(int count, byte[] data)
+        public DataEventArgs(int count, object[,] data)
         {
             this.Data = data;
             this.Count = count;

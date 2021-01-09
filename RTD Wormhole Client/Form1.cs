@@ -62,7 +62,19 @@ namespace RTD_Wormhole
         }
         void LinkClientMessageReceived(object sender, DataEventArgs args)
         {
-            AppendLog("Client received object[]");
+            AppendLog("Client received RTDdata");
+
+            for (int i = 0; i < args.Count; i++)
+            {
+                int id = (int)args.Data[0, i];
+
+                double value = 0;
+                if (args.Data[1, i].GetType() == typeof(double))
+                {
+                    value = (double)args.Data[1, i];
+                }
+                SetFX(value);
+            }
         }
               
         // UI
@@ -143,5 +155,13 @@ namespace RTD_Wormhole
             topicFX[3] = "LAST";
             LinkClient.Subscribe(0, topicFX);
         }
-    }
+
+            public void SetFX(double fx)
+            {
+                PostUI(() =>
+                {
+                    tb_fx.Text = fx.ToString();
+                });
+            }
+        }
 }
