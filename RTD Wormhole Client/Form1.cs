@@ -160,7 +160,7 @@ namespace RTD_Wormhole
             topicFX[1] = "#" + ccy;
             topicFX[2] = "FRX";
             topicFX[3] = "LAST";
-            LinkClient.Subscribe(0, topicFX);
+            if (LinkClient.Connected()) LinkClient.Subscribe(0, topicFX);
         }
 
             public void SetFX(double fx)
