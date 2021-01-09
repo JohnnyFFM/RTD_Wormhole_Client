@@ -42,6 +42,7 @@ namespace RTD_Wormhole
                 LinkClient = new WSClient(tb_client_ip.Text, Decimal.ToInt32(ud_client_port.Value), false);
                 LinkClient.EConnect += LinkClientConnected;
                 LinkClient.EDisconnect += LinkClientDisconnected;
+                LinkClient.EStatus += LinkClientStatus;
                 LinkClient.EData += LinkClientMessageReceived;
                 ChangeWebSocketStatus("client_link_status", 1);
                 LinkClient.Start();
@@ -51,6 +52,12 @@ namespace RTD_Wormhole
         {
             ChangeWebSocketStatus("client_link_status", 2);
             AppendLog("Client connected to server.");
+            // Todo: Establish Heartbeat
+        }
+
+        void LinkClientStatus(object sender, StatusEventArgs args)
+        {
+            AppendLog("Server status: " + args.Errormsg);
         }
 
         void LinkClientDisconnected(object sender, EventArgs args)
@@ -66,7 +73,7 @@ namespace RTD_Wormhole
 
             for (int i = 0; i < args.Count; i++)
             {
-                int id = (int)args.Data[0, i];
+                //int id = (int)args.Data[0, i];
 
                 double value = 0;
                 if (args.Data[1, i].GetType() == typeof(double))
@@ -139,7 +146,7 @@ namespace RTD_Wormhole
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             SubscribeFX(tb_ccy.Text);
         }

@@ -16,6 +16,7 @@ namespace RTD_Wormhole
         public bool connecting = false;
 
         public event EventHandler EConnect;
+        public event EventHandler<StatusEventArgs> EStatus;
         public event EventHandler EDisconnect;
         public event EventHandler EHeartBeatLost;
         public event EventHandler<DataEventArgs> EData;
@@ -32,6 +33,11 @@ namespace RTD_Wormhole
         protected virtual void OnConnect()
         {
             EConnect?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnStatus(StatusEventArgs error)
+        {
+            EStatus?.Invoke(this, error);
         }
 
         protected virtual void OnHeartBeatLost()
@@ -85,7 +91,7 @@ namespace RTD_Wormhole
             switch (args.MessageType)
             {
                 case WebSocketMessageType.Text:
-                    Console.WriteLine(Encoding.UTF8.GetString(args.Data), false);
+                    OnStatus(new StatusEventArgs(Encoding.UTF8.GetString(args.Data)));
                     break;
                 case WebSocketMessageType.Binary:
 
@@ -104,7 +110,6 @@ namespace RTD_Wormhole
                     break;
             }
         }
-
 
         public void Subscribe(int topicID, object[] data)
         {
@@ -149,6 +154,16 @@ namespace RTD_Wormhole
         {
             this.Data = data;
             this.Count = count;
+        }
+    }
+
+    public class StatusEventArgs : EventArgs
+    {
+        public string Errormsg { get; set; }
+
+        public StatusEventArgs(string errormsg)
+        {
+            this.Errormsg = errormsg;
         }
     }
 }
