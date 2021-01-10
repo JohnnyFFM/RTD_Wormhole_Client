@@ -49,7 +49,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.tb_fx = new System.Windows.Forms.TextBox();
@@ -246,7 +245,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.tb_fx);
@@ -259,15 +257,6 @@
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Test";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(279, 26);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Unsubscribe";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -392,7 +381,6 @@
         private System.Windows.Forms.TextBox tb_fx;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
     }
 }
 
