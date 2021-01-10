@@ -9,11 +9,12 @@ using WatsonWebsocket; // wsclient
 namespace RTD_Wormhole
 {
 
-    class WSClient
+    class WSClient : IDisposable
     {
         // Todo create log / error event to pass on data for logging
         private WatsonWsClient LinkClient;
         public bool connecting = false;
+        private bool _disposed = false;
 
         public event EventHandler EConnect;
         public event EventHandler<StatusEventArgs> EStatus;
@@ -28,6 +29,33 @@ namespace RTD_Wormhole
             LinkClient.ServerDisconnected += LinkClientDisconnected;
             LinkClient.MessageReceived += LinkClientMessageReceived;
         }
+
+        public void Dispose()
+        {
+            Dispose(true);
+
+            // Use SupressFinalize in case a subclass 
+            // of this type implements a finalizer.
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    // Clear all property values that maybe have been set
+                    // when the class was instantiated
+                    if (LinkClient.Connected) LinkClient.Stop();
+                    LinkClient.Dispose();
+                }
+
+                // Indicate that the instance has been disposed.
+                _disposed = true;
+            }
+        }
+
         // Events
 
         protected virtual void OnConnect()
@@ -117,6 +145,12 @@ namespace RTD_Wormhole
             byte[] srb = Helper.ObjectToByteArray(sr);
             LinkClient.SendAsync(srb);
         }
+        public void Unsubscribe(int topicID)
+        {
+            CancelRequest cr = new CancelRequest(topicID);
+            byte[] crb = Helper.ObjectToByteArray(cr);
+            LinkClient.SendAsync(crb);
+        }
     }
 
     [Serializable]
@@ -142,6 +176,17 @@ namespace RTD_Wormhole
         {
             this.count = x;
             this.data = y;
+        }
+    }
+
+    [Serializable]
+    struct CancelRequest
+    {
+        public readonly int topicID;
+
+        public CancelRequest(int x)
+        {
+            this.topicID = x;
         }
     }
 

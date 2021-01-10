@@ -170,5 +170,15 @@ namespace RTD_Wormhole
                     tb_fx.Text = fx.ToString();
                 });
             }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            if (LinkClient.Connected()) LinkClient.Unsubscribe(0);
         }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (LinkClient != null) LinkClient.Dispose();
+        }
+    }
 }

@@ -49,10 +49,13 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.tb_fx = new System.Windows.Forms.TextBox();
             this.tb_ccy = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.tb_fx = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -243,6 +246,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.tb_fx);
             this.groupBox1.Controls.Add(this.tb_ccy);
             this.groupBox1.Controls.Add(this.button1);
@@ -253,6 +259,42 @@
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Test";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(279, 26);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "Unsubscribe";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 61);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Spot";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(198, 25);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Unsubscribe";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            // 
+            // tb_fx
+            // 
+            this.tb_fx.Enabled = false;
+            this.tb_fx.Location = new System.Drawing.Point(62, 58);
+            this.tb_fx.Name = "tb_fx";
+            this.tb_fx.Size = new System.Drawing.Size(49, 20);
+            this.tb_fx.TabIndex = 3;
             // 
             // tb_ccy
             // 
@@ -282,14 +324,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Currency";
             // 
-            // tb_fx
-            // 
-            this.tb_fx.Enabled = false;
-            this.tb_fx.Location = new System.Drawing.Point(216, 28);
-            this.tb_fx.Name = "tb_fx";
-            this.tb_fx.Size = new System.Drawing.Size(100, 20);
-            this.tb_fx.TabIndex = 3;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -311,6 +345,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RTD Wormhole Client";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip.ResumeLayout(false);
@@ -355,6 +390,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tb_fx;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
