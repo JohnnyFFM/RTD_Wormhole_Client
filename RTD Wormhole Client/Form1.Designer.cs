@@ -161,7 +161,7 @@
             this.ud_client_port.TabIndex = 3;
             this.ud_client_port.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ud_client_port.Value = new decimal(new int[] {
-            7777,
+            8888,
             0,
             0,
             0});

@@ -119,11 +119,11 @@ namespace RTD_Wormhole
             switch (args.MessageType)
             {
                 case WebSocketMessageType.Text:
-                    OnStatus(new StatusEventArgs(Encoding.UTF8.GetString(args.Data)));
+                    OnStatus(new StatusEventArgs(Encoding.UTF8.GetString(args.Data.ToArray())));
                     break;
                 case WebSocketMessageType.Binary:
 
-                    object incoming = Helper.ByteArrayToObject(args.Data);
+                    object incoming = Helper.ByteArrayToObject(args.Data.ToArray());
                     switch (incoming)
                     {
                         case RTDdata data:
